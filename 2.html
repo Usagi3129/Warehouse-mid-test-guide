@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สรุปและแบบทดสอบเตรียมสอบกลางภาค: คลังสินค้าและสินค้าคงคลัง</title>
+<title>แบบทดสอบ 10 ข้อ: Warehouse & Inventory</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
   
   :root {
-    --bg-color: #0f172a;
+    --bg-color: #0b0f19;
     --card-bg: #1e293b;
     --card-inner: #0f172a;
     --primary: #3b82f6;
+    --primary-light: #60a5fa;
     --text-main: #f8fafc;
     --text-sub: #94a3b8;
     --accent-orange: #f59e0b;
     --accent-green: #10b981;
-    --accent-red: #ef4444;
+    --accent-red: #f87171;
   }
 
   body {
-    <div class="global-nav">
-    <a href="index.html" class="nav-link">📂 หน้าหลัก (สรุปเนื้อหา)</a>
-    <a href="2.html" class="nav-link">📝 หน้า 2 (แบบทดสอบ 10 ข้อ)</a>
-    <a href="3.html" class="nav-link">🎯 หน้า 3 (ทบทวนหน้าห้องสอบ)</a>
-  </div>
     font-family: 'Sarabun', -apple-system, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
@@ -34,163 +30,78 @@
     flex-direction: column;
     align-items: center;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
   }
 
   .container {
     width: 100%;
-    max-width: 1050px;
+    max-width: 1080px;
   }
 
-  .nav-tabs {
+  .global-nav {
     display: flex;
     gap: 8px;
     margin-bottom: 20px;
     overflow-x: auto;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
   }
 
-  .tab-btn {
-    background: #334155;
+  .nav-link {
+    background: #1e293b;
     color: #cbd5e1;
-    border: none;
+    border: 1px solid #334155;
+    text-decoration: none;
     padding: 10px 18px;
     border-radius: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
+    font-size: 14.5px;
+    font-weight: 600;
     white-space: nowrap;
     transition: all 0.2s;
   }
 
-  .tab-btn.active {
-    background: var(--primary);
+  .nav-link:hover {
+    background: #334155;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   }
 
-  .tab-btn.quiz-btn {
-    background: #4f46e5;
-  }
-
-  .tab-btn.quiz-btn.active {
-    background: #6366f1;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+  .nav-link.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
   }
 
   .slide {
-    display: none;
     background: var(--card-bg);
     border-radius: 16px;
-    padding: 28px 32px;
+    padding: 30px;
     border: 1px solid #334155;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  }
-
-  .slide.active {
-    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
   }
 
   .header {
     border-bottom: 2px solid var(--primary);
     padding-bottom: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .badge {
-    background: #2563eb;
+    background: #4f46e5;
     color: white;
     padding: 4px 12px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
   }
 
   h1 {
-    margin: 6px 0 0 0;
+    margin: 8px 0 0 0;
     font-size: 22px;
     color: #ffffff;
-  }
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; }
-  }
-
-  .card {
-    background: var(--card-inner);
-    border: 1px solid #334155;
-    border-left: 5px solid var(--primary);
-    border-radius: 8px;
-    padding: 16px;
-  }
-
-  .card-warning {
-    background: #291b00;
-    border: 1px solid #78350f;
-    border-left: 5px solid var(--accent-orange);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-top: 14px;
-  }
-
-  .card-title {
-    font-weight: 700;
-    font-size: 16px;
-    color: #60a5fa;
-    margin-bottom: 10px;
-  }
-
-  .formula {
-    background: #1e293b;
-    border: 1px solid #475569;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-weight: 700;
-    color: #f8fafc;
-    display: inline-block;
-    margin: 3px 0;
-    font-size: 14.5px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 8px;
-    font-size: 13.5px;
-  }
-
-  th, td {
-    border: 1px solid #334155;
-    padding: 8px 10px;
-    text-align: left;
-  }
-
-  th {
-    background: #334155;
-    color: white;
-  }
-
-  td {
-    background: var(--card-inner);
-  }
-
-  ul, ol {
-    margin: 6px 0;
-    padding-left: 20px;
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
-
-  li {
-    margin-bottom: 4px;
   }
 
   .quiz-item {
@@ -222,6 +133,7 @@
     font-size: 14.5px;
     cursor: pointer;
     transition: all 0.15s;
+    color: #f8fafc;
   }
 
   .quiz-opt:hover {
@@ -229,16 +141,16 @@
   }
 
   .quiz-opt.correct {
-    background: #064e3b;
-    border-color: #10b981;
-    color: #a7f3d0;
+    background: #064e3b !important;
+    border-color: #10b981 !important;
+    color: #a7f3d0 !important;
     font-weight: 700;
   }
 
   .quiz-opt.incorrect {
-    background: #7f1d1d;
-    border-color: #ef4444;
-    color: #fecaca;
+    background: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fecaca !important;
   }
 
   .quiz-explanation {
@@ -254,12 +166,12 @@
   }
 
   .footer {
-    margin-top: 20px;
+    margin-top: 24px;
     border-top: 1px solid #334155;
-    padding-top: 8px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--text-sub);
   }
 </style>
@@ -268,439 +180,161 @@
 
 <div class="container">
 
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchSlide(0)">Slide 1: CH 2-1 (Time Series)</button>
-    <button class="tab-btn" onclick="switchSlide(1)">Slide 2: CH 2-2 (Regression)</button>
-    <button class="tab-btn" onclick="switchSlide(2)">Slide 3: CH 3-1 (EOQ & Backorders)</button>
-    <button class="tab-btn" onclick="switchSlide(3)">Slide 4: CH 3-2 (POQ & Discount)</button>
-    <button class="tab-btn" onclick="switchSlide(4)">Slide 5: CH 3-3 (ROP & Safety Stock)</button>
-    <button class="tab-btn quiz-btn" onclick="switchSlide(5)">📝 แบบทดสอบ 10 ข้อ (Quiz)</button>
+  <div class="global-nav">
+    <a href="index.html" class="nav-link">📂 หน้า 1 (สรุปเนื้อหา)</a>
+    <a href="2.html" class="nav-link active">📝 หน้า 2 (แบบทดสอบ 10 ข้อ)</a>
+    <a href="3.html" class="nav-link">🎯 หน้า 3 (ทบทวนหน้าห้องสอบ)</a>
   </div>
 
-  <!-- SLIDE 1 -->
-  <div class="slide active">
-    <div class="header">
-      <div>
-        <span class="badge">CHAPTER 2-1</span>
-        <h1>Demand Forecasting: พื้นฐาน & Time Series</h1>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. ประเภทความต้องการ (Types of Demand)</div>
-        <ul>
-          <li><b>Independent Demand:</b> สินค้าสำเร็จรูป ลูกค้าภายนอก &rarr; <span style="color:#60a5fa; font-weight:bold;">ต้องใช้สถิติพยากรณ์</span></li>
-          <li><b>Dependent Demand:</b> ชิ้นส่วน/วัตถุดิบ &rarr; <span style="color:var(--accent-green); font-weight:bold;">คำนวณจาก BOM ไม่ต้องพยากรณ์</span></li>
-        </ul>
-        <div class="card-title" style="margin-top: 12px;">2. รูปแบบความต้องการ (Demand Patterns)</div>
-        <ul>
-          <li><b>Constant:</b> นิ่ง เสถียร ไม่เปลี่ยนตามเวลา</li>
-          <li><b>Trend:</b> เพิ่มหรือลดลงต่อเนื่องตามเวลา</li>
-          <li><b>Seasonality:</b> รอบเวลาแน่นอน คาดเดาได้ (สัปดาห์/ปี)</li>
-          <li><b>Cyclical:</b> รอบวัฏจักรเศรษฐกิจ (> 1 ปี)</li>
-          <li><b>Random:</b> ผันแปรสุ่ม ชั่วคราว คาดเดาไม่ได้</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">3. โมเดล Time Series ยอดนิยม</div>
-        <ul>
-          <li><b>Naïve:</b> <span class="formula">F(t+1) = D(t)</span></li>
-          <li><b>SMA n งวด:</b> <span class="formula">F(t+1) = ผลรวม D ย้อนหลัง / n</span></li>
-          <li><b>WMA:</b> <span class="formula">F(t+1) = Σ (น้ำหนัก W<sub>i</sub> × ยอดจริง D<sub>i</sub>)</span></li>
-          <li><b>Single Exponential Smoothing:</b><br><span class="formula">F(t+1) = α·D(t) + (1 - α)·F(t)</span>
-            <ul>
-              <li>α ต่ำ (ใกล้ 0) &rarr; เชื่อข้อมูลเก่า นิ่ง ไม่แกว่ง</li>
-              <li>α สูง (ใกล้ 1) &rarr; ตอบสนองเร็ว ไวต่อข้อมูลล่าสุด</li>
-            </ul>
-          </li>
-          <li><b>Holt’s Method (Trend):</b> <span class="formula">F(t+m) = S(t) + m·T(t)</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 1 / 6</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 2 -->
   <div class="slide">
     <div class="header">
       <div>
-        <span class="badge">CHAPTER 2-2</span>
-        <h1>Simple Linear Regression (y = a + bx)</h1>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. ตัวแปรสมการเส้นตรง</div>
-        <div style="text-align: center; margin: 6px 0;"><span class="formula" style="font-size: 16px;">y = a + bx</span></div>
-        <ul>
-          <li><b>x:</b> คาบเวลา (สัปดาห์ที่ 1, 2, 3...)</li>
-          <li><b>y:</b> ปริมาณขนส่งจริง (ตัน)</li>
-          <li><b>b:</b> ความชัน = <span style="color:#60a5fa; font-weight:bold;">อัตราการเติบโตต่อสัปดาห์</span></li>
-          <li><b>a:</b> จุดตัดแกน y (ค่าเริ่มต้น)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. สูตรคำนวณเข้าห้องสอบ</div>
-        <ul>
-          <li><span class="formula">b = [ n·Σxy - (Σx)(Σy) ] / [ n·Σx² - (Σx)² ]</span></li>
-          <li><span class="formula">a = ȳ - b·x̄</span></li>
-          <li><small style="color:var(--text-sub);">x̄ = Σx / n , ȳ = Σy / n</small></li>
-        </ul>
-      </div>
-    </div>
-    <div class="card-warning">
-      <div class="card-title" style="color:var(--accent-orange); margin-bottom:4px;">⚠️ ทริคห้องสอบข้อ 1</div>
-      <ul>
-        <li>เมื่อ n = 5 ตัวส่วนของ b คือ <span class="formula">5(55) - (15)² = 50</span> เท่ากันทุกเส้นทาง</li>
-        <li>ถ้าถาม <b>"เส้นทางใดเติบโตสูงที่สุด"</b> &rarr; เลือกเส้นทางที่มี <b>ค่า b (ความชัน) มากที่สุด</b></li>
-        <li>พยากรณ์สัปดาห์ที่ 6 &rarr; แทนค่า <b>x = 6</b> ลงในสมการ</li>
-      </ul>
-    </div>
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 2 / 6</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 3 -->
-  <div class="slide">
-    <div class="header">
-      <div>
-        <span class="badge">CHAPTER 3-1 & 3-2</span>
-        <h1>Basic EOQ & ยอมให้ของขาดมือ (Backorders)</h1>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. Basic EOQ Model (ของไม่ขาดมือ)</div>
-        <ul>
-          <li>ปริมาณสั่งซื้อประหยัดสุด: <br><span class="formula">EOQ = √( 2DS / H )</span> &nbsp; <small>(H = h × C)</small></li>
-          <li>ต้นทุนรวมต่อปี: <span class="formula">TC = (D/Q)·S + (Q/2)·H</span></li>
-          <li>จำนวนครั้งสั่ง/ปี: <span class="formula">N = D / Q</span></li>
-          <li>ระยะเวลารอบสั่ง: <span class="formula">T = (Q / D) × วันทำงาน</span></li>
-          <li><small style="color:#60a5fa; font-weight:bold;">* ณ จุด EOQ ต้นทุนสั่งซื้อจะเท่ากับต้นทุนถือครองพอดี</small></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. EOQ with Backorders (ยอมให้ของขาดมือ)</div>
-        <ul>
-          <li><b>P:</b> ต้นทุนของขาดมือ (บาท/หน่วย/ปี)</li>
-          <li>ปริมาณสั่งซื้อ: <br><span class="formula">Q* = √( [2DS/H] × [(H+P)/P] )</span></li>
-          <li>ขาดมือสูงสุด: <span class="formula">B* = Q* × [ H / (H + P) ]</span></li>
-          <li>สต็อกสูงสุด: <span class="formula">S<sub>max</sub> = Q* - B*</span></li>
-          <li>ต้นทุนรวม: <br><span class="formula">TC = (D/Q*)S + [S<sub>max</sub>²/(2Q*)]H + [B*²/(2Q*)]P</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 3 / 6</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 4 -->
-  <div class="slide">
-    <div class="header">
-      <div>
-        <span class="badge">CHAPTER 3-2</span>
-        <h1>POQ Model (ผลิตไปใช้ไป) & Quantity Discount</h1>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. POQ / EPQ Model (ทยอยผลิต ทยอยใช้)</div>
-        <ul>
-          <li>เงื่อนไข: <b>p (อัตราผลิต) > d (อัตราใช้)</b> เสมอ</li>
-          <li>ปริมาณผลิตเหมาะสม: <br><span class="formula">Q<sub>p</sub>* = √( 2DS / H ) × √( p / (p - d) )</span></li>
-          <li>สินค้าคงคลังสูงสุด: <span class="formula">I<sub>max</sub> = Q<sub>p</sub>* × [ (p - d) / p ]</span></li>
-          <li>ต้นทุนรวมต่อปี: <span class="formula">TC = (D/Q<sub>p</sub>*)·S + (I<sub>max</sub>/2)·H</span></li>
-          <li><small style="color:var(--accent-orange); font-weight:bold;">* ระวังหน่วย: D ต้องเป็นต่อปี, ส่วน p และ d ต้องเป็นต่อวัน</small></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. Quantity Discount (ส่วนลดปริมาณ)</div>
-        <ol>
-          <li>คำนวณ EOQ แต่ละช่วงราคา: <span class="formula">EOQ = √( 2DS / H )</span></li>
-          <li><b>ตรวจช่วงสั่งซื้อจริง:</b>
-            <ul>
-              <li>ถ้าอยู่ในช่วง &rarr; ใช้เลขนั้น</li>
-              <li>ถ้าต่ำกว่าขั้นต่ำ &rarr; <b style="color:var(--accent-orange);">ปัดขึ้นเป็นขอบล่างของช่วงทันที</b></li>
-            </ul>
-          </li>
-          <li>คำนวณ TC รวมค่าซื้อสินค้า: <br><span class="formula">TC = (D/Q)·S + (Q/2)·H + D·C</span></li>
-          <li>เลือกสั่งซื้อที่ให้ <b>TC ต่ำที่สุด</b></li>
-        </ol>
-      </div>
-    </div>
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 4 / 6</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 5 -->
-  <div class="slide">
-    <div class="header">
-      <div>
-        <span class="badge">CHAPTER 3-3</span>
-        <h1>จุดสั่งซื้อใหม่ (ROP) & สต๊อกปลอดภัย (Safety Stock)</h1>
-      </div>
-    </div>
-    <div class="card" style="margin-bottom: 14px;">
-      <div class="card-title">สูตรหลัก: <span class="formula">ROP = (d̄ × LT̄) + SS</span></div>
-      <table>
-        <thead>
-          <tr>
-            <th>กรณี</th>
-            <th>สถานการณ์</th>
-            <th>สูตร Safety Stock (SS)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Demand แน่นอน, LT แน่นอน</td>
-            <td><b>SS = 0</b></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Demand ผันผวน, LT แน่นอน</td>
-            <td><span class="formula">SS = Z · σ<sub>d</sub> · √LT</span></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Demand แน่นอน, LT ผันผวน</td>
-            <td><span class="formula">SS = Z · d̄ · σ<sub>LT</sub></span></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td><b style="color:var(--accent-red);">ผันผวนทั้งคู่ (ออกสอบบ่อย)</b></td>
-            <td><span class="formula">SS = Z · √( LT̄·σ<sub>d</sub>² + d̄²·σ<sub>LT</sub>² )</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">ค่า Z ตาม Service Level</div>
-        <ul>
-          <li>90% &rarr; <b>Z = 1.28</b></li>
-          <li>95% &rarr; <b>Z = 1.65</b> (ใช้บ่อยสุด)</li>
-          <li>97.5% &rarr; <b>Z = 1.96</b></li>
-          <li>99% &rarr; <b>Z = 2.33</b></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">สูตรสถิติจากตารางความถี่</div>
-        <ul>
-          <li>เฉลี่ยถ่วงน้ำหนัก: <span class="formula">X̄ = Σ(f<sub>i</sub>·X<sub>i</sub>) / Σf<sub>i</sub></span></li>
-          <li>ส่วนเบี่ยงเบน: <br><span class="formula">σ = √[ Σ f<sub>i</sub>(X<sub>i</sub> - X̄)² / (n - 1) ]</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 5 / 6</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 6: 10 QUIZ QUESTIONS -->
-  <div class="slide">
-    <div class="header" style="border-bottom-color: #6366f1;">
-      <div>
-        <span class="badge" style="background: #4f46e5;">PRACTICE QUIZ</span>
-        <h1>แบบทดสอบวัดความเข้าใจ 10 ข้อ (คลิกเลือกคำตอบเพื่อดูเฉลย)</h1>
+        <span class="badge">PRACTICE QUIZ</span>
+        <h1>แบบทดสอบเตรียมสอบ 10 ข้อ (คลิกเลือกคำตอบเพื่อดูเฉลย)</h1>
       </div>
     </div>
 
     <!-- ข้อ 1 -->
     <div class="quiz-item">
-      <div class="quiz-question">1. คุณลักษณะสำคัญที่สุดของเทคนิคการพยากรณ์เชิงคุณภาพแบบ Delphi Method คือข้อใด</div>
+      <div class="quiz-question">1. คุณลักษณะสำคัญที่สุดของ Delphi Method คือข้อใด</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ก. รวมตัวแทนฝ่ายขายมาประชุมถกเถียงกันในห้องประชุมใหญ่</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp1')">ข. ผู้เชี่ยวชาญตอบแบบสอบถามหลายรอบโดยไม่เปิดเผยตัวตนต่อกัน เพื่อลดอิทธิพลทางสังคม</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ค. สอบถามความพึงพอใจจากกลุ่มผู้บริโภคโดยตรงผ่านการสุ่มตัวอย่าง</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ง. อาศัยการตัดสินใจเด็ดขาดของผู้บริหารระดับสูงเพียงคนเดียว</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ก. ให้ตัวแทนฝ่ายขายมาประชุมถกเถียงกันในห้องประชุมใหญ่</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp1')">ข. ผู้เชี่ยวชาญตอบแบบสอบถามหลายรอบโดยไม่เปิดเผยตัวตนเพื่อลดอิทธิพลทางสังคม</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ค. สอบถามความพึงพอใจจากผู้บริโภคโดยตรงผ่านการสุ่มตัวอย่าง</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp1')">ง. อาศัยการตัดสินใจของผู้บริหารระดับสูงคนเดียว</div>
       </div>
-      <div id="exp1" class="quiz-explanation">
-        <b>เฉลย ข:</b> Delphi Method เน้นระดมความคิดเห็นจากผู้เชี่ยวชาญหลายรอบโดยไม่เปิดเผยตัวตน (Anonymous) เพื่อป้องกันไม่ให้ผู้มีอิทธิพลหรือเสียงดังชี้นำความคิดเห็นคนอื่น
-      </div>
+      <div id="exp1" class="quiz-explanation"><b>เฉลย ข:</b> Delphi Method เน้นระดมความเห็นผู้เชี่ยวชาญโดยไม่เปิดเผยตัวตน (Anonymous) เพื่อป้องกันการชี้นำ</div>
     </div>
 
     <!-- ข้อ 2 -->
     <div class="quiz-item">
-      <div class="quiz-question">2. หากข้อมูลยอดขายจริงมีความผันผวนสูงมากจากปัจจัยภายนอกแบบสุ่ม (Random variation) ผู้พยากรณ์ควรเลือกค่า α ใน Exponential Smoothing อย่างไร</div>
+      <div class="quiz-question">2. หากยอดขายจริงมีความผันผวนสูงจากปัจจัยสุ่ม ควรเลือกค่า α ใน Exponential Smoothing อย่างไร</div>
       <div class="quiz-options">
         <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp2')">ก. กำหนดให้ α มีค่าใกล้ 1.0</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp2')">ข. กำหนดให้ α มีค่าใกล้ 0 (เช่น 0.1 – 0.2) เพื่อกรองสัญญาณรบกวน</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp2')">ข. กำหนดให้ α มีค่าต่ำ (ใกล้ 0) เพื่อกรองสัญญาณรบกวน</div>
         <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp2')">ค. กำหนดให้ α = 0.5 เสมอ</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp2')">ง. ค่า α ไม่มีผลต่อความแกว่งของเส้นพยากรณ์</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp2')">ง. ค่า α ไม่มีผลต่อความแกว่ง</div>
       </div>
-      <div id="exp2" class="quiz-explanation">
-        <b>เฉลย ข:</b> ค่า α ต่ำ (ใกล้ 0) จะให้น้ำหนักกับค่าพยากรณ์ในอดีตมากกว่ายอดจริงล่าสุด ทำให้เส้นพยากรณ์มีความราบเรียบ (Smooth) และไม่แกว่งตามความผันแปรสุ่ม
-      </div>
+      <div id="exp2" class="quiz-explanation"><b>เฉลย ข:</b> ค่า α ต่ำช่วยให้เส้นพยากรณ์ราบเรียบ ไม่แกว่งตามความผันแปรรอบด้าน</div>
     </div>
 
     <!-- ข้อ 3 -->
     <div class="quiz-item">
-      <div class="quiz-question">3. ในการสร้างสมการเส้นตรง y = a + bx หากพบว่า เส้นทางที่ 1 มี b = 4.5, เส้นทางที่ 2 มี b = 8.2, เส้นทางที่ 3 มี b = 2.1 ข้อใดสรุปได้ถูกต้องที่สุด</div>
+      <div class="quiz-question">3. สมการ y = a + bx เส้นทางใดมีอัตราการเติบโตสูงสุด</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ก. เส้นทางที่ 1 มียอดขนส่งรวมในอดีตสูงที่สุด</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ข. เส้นทางที่ 3 มีความแม่นยำในการพยากรณ์สูงที่สุด</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp3')">ค. เส้นทางที่ 2 มีอัตราการเติบโตของปริมาณขนส่งต่อสัปดาห์สูงที่สุด</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ง. เส้นทางที่ 2 เริ่มต้นด้วยปริมาณขนส่งสูงกว่าเส้นทางอื่นเสมอ</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ก. เส้นทางที่มีผลรวมยอดขายสูงที่สุด</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ข. เส้นทางที่มีจุดตัด a สูงสุด</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp3')">ค. เส้นทางที่มีค่า b (ความชัน) มากที่สุด</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp3')">ง. เส้นทางที่มีจำนวนสัปดาห์ n มากที่สุด</div>
       </div>
-      <div id="exp3" class="quiz-explanation">
-        <b>เฉลย ค:</b> ค่า b คือความชัน (Slope) ซึ่งแสดงอัตราการเปลี่ยนแปลงหรืออัตราการเติบโตต่อหนึ่งหน่วยเวลา เส้นทางที่มีค่า b สูงที่สุด (8.2) ย่อมเติบโตเร็วที่สุด
-      </div>
+      <div id="exp3" class="quiz-explanation"><b>เฉลย ค:</b> ค่า b คือความชัน แสดงอัตราการเปลี่ยนแปลงหรือการเติบโตต่อหน่วยเวลา</div>
     </div>
 
     <!-- ข้อ 4 -->
     <div class="quiz-item">
-      <div class="quiz-question">4. ณ จุดสั่งซื้อที่ประหยัดที่สุด (Basic EOQ) ต้นทุนการสั่งซื้อรวมต่อปี และต้นทุนการถือครองรวมต่อปี มีความสัมพันธ์กันอย่างไร</div>
+      <div class="quiz-question">4. ณ จุด Basic EOQ ต้นทุนสั่งซื้อและต้นทุนถือครองมีความสัมพันธ์กันอย่างไร</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ก. ต้นทุนการสั่งซื้อสูงกว่าต้นทุนการถือครองเป็นสองเท่า</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ข. ต้นทุนการถือครองสูงกว่าต้นทุนการสั่งซื้อเสมอ</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ก. ต้นทุนสั่งซื้อสูงกว่าถือครองสองเท่า</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ข. ต้นทุนถือครองสูงกว่าสั่งซื้อเสมอ</div>
         <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp4')">ค. ทั้งสองต้นทุนมีมูลค่าเท่ากันพอดี และทำให้ต้นทุนรวมต่ำที่สุด</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ง. ทั้งสองต้นทุนลดลงจนเป็นศูนย์พร้อมกัน</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp4')">ง. ทั้งสองต้นทุนลดลงเป็นศูนย์พร้อมกัน</div>
       </div>
-      <div id="exp4" class="quiz-explanation">
-        <b>เฉลย ค:</b> กราฟ EOQ เป็นจุดตัดระหว่างเส้นต้นทุนสั่งซื้อที่ลาดลงกับเส้นต้นทุนถือครองที่ชันขึ้น ณ จุดตัดนี้ ต้นทุนทั้งสองจะเท่ากันพอดี และส่งผลให้เส้นต้นทุนรวม (Total Cost) อยู่ ณ จุดต่ำสุด
-      </div>
+      <div id="exp4" class="quiz-explanation"><b>เฉลย ค:</b> ที่จุด EOQ ต้นทุนการสั่งซื้อเท่ากับต้นทุนถือครองพอดี และส่งผลให้ TC ต่ำที่สุด</div>
     </div>
 
     <!-- ข้อ 5 -->
     <div class="quiz-item">
-      <div class="quiz-question">5. หากบริษัทเปลี่ยนนโยบายจากการสั่งซื้อบ่อยๆ ครั้งละน้อยๆ มาเป็นการสั่งล็อตใหญ่ นานๆ สั่งที จะเกิดผลกระทบอย่างไรต่อต้นทุน</div>
+      <div class="quiz-question">5. หากเปลี่ยนมาสั่งซื้อล็อตใหญ่ นานๆ สั่งที จะส่งผลต่อต้นทุนอย่างไร</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp5')">ก. ต้นทุนการสั่งซื้อต่อปีเพิ่มขึ้น, ต้นทุนการถือครองต่อปีลดลง</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp5')">ข. ต้นทุนการสั่งซื้อต่อปีลดลง, ต้นทุนการถือครองต่อปีเพิ่มขึ้น</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp5')">ก. ต้นทุนสั่งซื้อเพิ่มขึ้น, ต้นทุนถือครองลดลง</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp5')">ข. ต้นทุนสั่งซื้อลดลง, ต้นทุนถือครองเพิ่มขึ้น</div>
         <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp5')">ค. ทั้งสองต้นทุนลดลงพร้อมกัน</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp5')">ง. ต้นทุนรวมลดลงโดยที่ต้นทุนรายย่อยไม่เปลี่ยนแปลง</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp5')">ง. ไม่มีข้อใดถูกต้อง</div>
       </div>
-      <div id="exp5" class="quiz-explanation">
-        <b>เฉลย ข:</b> สั่งล็อตใหญ่ (Q มาก) ทำให้จำนวนครั้งที่สั่งต่อปี (D/Q) ลดลง ส่งผลให้ค่าสั่งซื้อรวมลดลง แต่ปริมาณสต็อกเฉลี่ยในคลัง (Q/2) สูงขึ้น จึงต้องจ่ายค่าเก็บรักษาเพิ่มขึ้น
-      </div>
+      <div id="exp5" class="quiz-explanation"><b>เฉลย ข:</b> สั่งล็อตใหญ่ทำให้จำนวนครั้งสั่งลดลง (ต้นทุนสั่งซื้อลด) แต่ของค้างสต็อกเฉลี่ยสูงขึ้น (ต้นทุนถือครองเพิ่ม)</div>
     </div>
 
     <!-- ข้อ 6 -->
     <div class="quiz-item">
-      <div class="quiz-question">6. ข้อใดเป็นข้อแตกต่างสำคัญระหว่าง Backorders (การค้างส่ง) และ Lost Sales (การสูญเสียยอดขาย)</div>
+      <div class="quiz-question">6. ข้อแตกต่างระหว่าง Backorders และ Lost Sales คืออะไร</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ก. Backorders ลูกค้ายกเลิกทันที แต่ Lost Sales ยินดีรอรับสินค้า</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ข. Backorders เกิดกับสินค้าสั่งผลิต ส่วน Lost Sales เกิดเฉพาะโรงพยาบาล</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp6')">ค. Backorders ลูกค้ายินดีรอรับของเมื่อสินค้ามาถึง ส่วน Lost Sales คือยอดขายสูญหายไปถาวร</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ง. Backorders ไม่มีต้นทุนความเสียหายใดๆ เกิดขึ้น</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ก. Backorders ลูกค้ายกเลิกทันที</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp6')">ข. Backordersลูกค้ายินดีรอรับของเมื่อสินค้ามาถึง ส่วน Lost Sales เสียหายถาวร</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ค. ไม่มีข้อแตกต่างกัน</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp6')">ง. Lost Sales เกิดในโรงงานเท่านั้น</div>
       </div>
-      <div id="exp6" class="quiz-explanation">
-        <b>เฉลย ค:</b> Backorder หมายถึงยอมให้สินค้าขาดมือชั่วคราวโดยลูกค้าไม่ยกเลิกออเดอร์ เมื่อสินค้าเข้าคลังจะส่งมอบย้อนหลังได้ทั้งหมด แต่ Lost Sales คือลูกค้าไปซื้อที่อื่นทันที ทำให้เสียยอดขายนั้นไปถาวร
-      </div>
+      <div id="exp6" class="quiz-explanation"><b>เฉลย ข:</b> Backorder คือลูกค้ารอรับสินค้าชั่วคราว ส่วน Lost Sales คือลูกค้าไปซื้อที่อื่นและสูญเสียยอดขายไปถาวร</div>
     </div>
 
     <!-- ข้อ 7 -->
     <div class="quiz-item">
-      <div class="quiz-question">7. ในแบบจำลอง POQ/EPQ ข้อใดเป็นเงื่อนไขบังคับ (Constraint) ที่ต้องเป็นจริงเสมอเพื่อให้แบบจำลองทำงานได้</div>
+      <div class="quiz-question">7. ในแบบจำลอง POQ เงื่อนไขบังคับใดต้องเป็นจริงเสมอ</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ก. อัตราการผลิต (p) ต้องเท่ากับอัตราการใช้ (u)</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ข. อัตราการใช้ (u) ต้องมากกว่าอัตราการผลิต (p)</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp7')">ค. อัตราการผลิต (p) ต้องมากกว่าอัตราการใช้ (u) เสมอ</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ง. โรงงานต้องเปิดทำงาน 365 วันต่อปี</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ก. อัตราการผลิต p ต้องเท่ากับอัตราใช้ u</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ข. อัตราการใช้ u ต้องมากกว่าอัตราผลิต p</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp7')">ค. อัตราการผลิต p ต้องมากกว่าอัตราการใช้ u เสมอ</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp7')">ง. โรงงานเปิดทำงาน 365 วัน</div>
       </div>
-      <div id="exp7" class="quiz-explanation">
-        <b>เฉลย ค:</b> ในสูตร POQ มีพจน์ √(p / (p - u)) หาก p ≤ u ตัวส่วนจะติดลบหรือเป็นศูนย์ ซึ่งในความเป็นจริงหากผลิตช้ากว่าที่ใช้ สต็อกจะไม่สามารถสะสมเป็น I_max ได้ และจะขาดสต็อกทันที
-      </div>
+      <div id="exp7" class="quiz-explanation"><b>เฉลย ค:</b> อัตราผลิต p ต้องมากกว่าอัตราใช้ u เสมอ เพื่อให้เกิดการสะสมสต็อกเป็น I_max ได้</div>
     </div>
 
     <!-- ข้อ 8 -->
     <div class="quiz-item">
-      <div class="quiz-question">8. ในแบบจำลอง Quantity Discount หากคำนวณ EOQ แล้วได้ค่าน้อยกว่าขั้นต่ำของช่วงราคานั้น ต้องดำเนินการอย่างไรต่อ</div>
+      <div class="quiz-question">8. Quantity Discount หากคำนวณ EOQ แล้วต่ำกว่าขั้นต่ำของช่วง ต้องทำอย่างไร</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ก. ตัดระดับราคานั้นทิ้งทันที</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp8')">ข. ปรับปริมาณสั่งซื้อขึ้นไปที่จุดต่ำสุด (ขอบล่าง) ของช่วงราคานั้น แล้วนำไปคำนวณ TC รวม</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ค. ใช้ค่า EOQ เดิมที่ได้คำนวณไว้</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ง. นำค่าเฉลี่ยของช่วงราคานั้นมาใช้แทน</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ก. ตัดทิ้งทันที</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp8')">ข. ปรับปริมาณขึ้นไปที่ขอบล่างของช่วงราคานั้น แล้วนำไปคำนวณ TC</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ค. ใช้ค่าเดิม</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp8')">ง. ใช้ค่าเฉลี่ย</div>
       </div>
-      <div id="exp8" class="quiz-explanation">
-        <b>เฉลย ข:</b> หาก EOQ คำนวณได้ต่ำกว่าขั้นต่ำ แสดงว่าสั่งที่จุด EOQ ไม่ได้ส่วนลด จึงต้องปรับปริมาณสั่งซื้อขึ้นไปที่ "ขอบล่างของช่วง (Lower boundary)" เพื่อให้ได้รับสิทธิ์ส่วนลด แล้วนำค่า Q นั้นไปเปรียบเทียบ TC รวม
-      </div>
+      <div id="exp8" class="quiz-explanation"><b>เฉลย ข:</b> ต้องปรับขึ้นไปที่จุดขอบล่าง (Lower boundary) เพื่อให้ได้รับสิทธิ์ส่วนลด แล้วนำไปเทียบ TC</div>
     </div>
 
     <!-- ข้อ 9 -->
     <div class="quiz-item">
-      <div class="quiz-question">9. หากอุปสงค์ของลูกค้า (Demand) และเวลานำ (Lead Time) มีค่าแน่นอนและคงที่ทั้งคู่ ปริมาณ Safety Stock (SS) ควรมีค่าเท่าใด</div>
+      <div class="quiz-question">9. หากอุปสงค์และเวลานำแน่นอนคงที่ทั้งคู่ Safety Stock (SS) ควรมีค่าเท่าใด</div>
       <div class="quiz-options">
         <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp9')">ก. SS = 0 เนื่องจากไม่มีความเสี่ยงด้านความผันผวน</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ข. ต้องมีค่าเท่ากับยอดขายเฉลี่ย 1 สัปดาห์เสมอ</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ค. SS = Z · σd · √LT</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ง. ต้องมีค่าเท่ากับขนาด EOQ</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ข. เท่ากับยอดขาย 1 สัปดาห์</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ค. เท่ากับสูตร Z·σd·√LT</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp9')">ง. เท่ากับ EOQ</div>
       </div>
-      <div id="exp9" class="quiz-explanation">
-        <b>เฉลย ก:</b> Safety Stock มีไว้เพื่อรับมือกับ "ความไม่แน่นอน" เมื่อทั้งความต้องการและเวลานำทราบค่าแน่นอน 100% จึงไม่จำเป็นต้องสำรองของเผื่อไว้ (SS = 0) และ ROP = d̄ × LT ได้เลย
-      </div>
+      <div id="exp9" class="quiz-explanation"><b>เฉลย ก:</b> เมื่อทุกอย่างแน่นอน 100% ไม่มีความเสี่ยง จึงไม่ต้องสำรองสินค้าเผื่อ (SS = 0)</div>
     </div>
 
     <!-- ข้อ 10 -->
     <div class="quiz-item">
-      <div class="quiz-question">10. เพราะเหตุใดแบบจำลอง Fixed-Order-Interval (FOI) จึงมักต้องถือ Safety Stock สูงกว่าระบบ Reorder Point (ROP)</div>
+      <div class="quiz-question">10. ทำไมระบบ FOI ถึงต้องถือ Safety Stock สูงกว่าระบบ ROP</div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ก. เพราะระบบ FOI มักใช้กับสินค้าที่มีมูลค่าสูงกว่า</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp10')">ข. เพราะระบบ FOI ต้องรับความเสี่ยงครอบคลุมทั้งช่วงทบทวนและเวลานำ (OI + LT)</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ค. เพราะระบบ FOI ตรวจนับสต็อกแบบต่อเนื่องทุกวัน</div>
-        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ง. เพราะซัพพลายเออร์ในระบบ FOI ส่งมอบสินค้าล่าช้ากว่าเสมอ</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ก. เพราะสินค้ามูลค่าสูงกว่า</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, true, 'exp10')">ข. เพราะระบบ FOI ต้องเผชิญความเสี่ยงยาวนานตลอดช่วงทบทวนและเวลานำ (OI + LT)</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ค. เพราะตรวจนับสต็อกทุกวัน</div>
+        <div class="quiz-opt" onclick="checkAnswer(this, false, 'exp10')">ง. ซัพพลายเออร์ส่งของช้ากว่าเสมอ</div>
       </div>
-      <div id="exp10" class="quiz-explanation">
-        <b>เฉลย ข:</b> ระบบ ROP เผชิญความเสี่ยงเฉพาะช่วงรอของ (LT) แต่ระบบ FOI ตรวจนับเป็นงวด (OI) ความเสี่ยงจึงลากยาวตลอดช่วง (OI + LT) สูตร Safety Stock จึงคูณด้วย √(OI + LT) ส่งผลให้ต้องถือสต็อกสำรองมากกว่า
-      </div>
+      <div id="exp10" class="quiz-explanation"><b>เฉลย ข:</b> ระบบ FOI มีความเสี่ยงครอบคลุมช่วง (OI + LT) จึงต้องสำรองสต็อกเผื่อมากกว่า ROP</div>
     </div>
 
-    <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 6 / 6 (Quiz 10 ข้อ)</span>
-    </div>
+    <div class="footer"><span>Warehouse & Inventory Management</span><span>2.html</span></div>
   </div>
 
 </div>
 
 <script>
-  function switchSlide(index) {
-    const slides = document.querySelectorAll('.slide');
-    const buttons = document.querySelectorAll('.tab-btn');
-    
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-    
-    buttons.forEach((btn, i) => {
-      btn.classList.toggle('active', i === index);
-    });
-  }
-
   function checkAnswer(element, isCorrect, expId) {
     const parent = element.parentElement;
     const options = parent.querySelectorAll('.quiz-opt');
-    
-    options.forEach(opt => {
-      opt.onclick = null;
-    });
-
+    options.forEach(opt => opt.onclick = null);
     if (isCorrect) {
       element.classList.add('correct');
     } else {
       element.classList.add('incorrect');
       options.forEach(opt => {
-        if (opt.getAttribute('onclick')?.includes('true')) {
-          opt.classList.add('correct');
-        }
+        if (opt.getAttribute('onclick')?.includes('true')) opt.classList.add('correct');
       });
     }
-
     document.getElementById(expId).style.display = 'block';
   }
 </script>
 
 </body>
 </html>
-
