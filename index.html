@@ -38,7 +38,6 @@
     max-width: 1080px;
   }
 
-  /* แถบเมนูกลางเชื่อมข้ามหน้าเว็บ */
   .global-nav {
     display: flex;
     gap: 8px;
@@ -178,7 +177,7 @@
 <div class="container">
 
   <div class="global-nav">
-    <a href="index.html" class="nav-link">📂 หน้าหลัก (สรุปเนื้อหา)</a>
+    <a href="index.html" class="nav-link active">📂 หน้า 1 (สรุปเนื้อหา)</a>
     <a href="2.html" class="nav-link">📝 หน้า 2 (แบบทดสอบ 10 ข้อ)</a>
     <a href="3.html" class="nav-link">🎯 หน้า 3 (ทบทวนหน้าห้องสอบ)</a>
   </div>
@@ -186,17 +185,45 @@
   <div class="slide">
     <div class="header">
       <div>
-        <span class="badge">GUIDE NAVIGATION</span>
-        <h1>เลือกหัวข้อการทบทวนด้านบนได้เลยครับ</h1>
+        <span class="badge">CHAPTER 2-1 & 2-2</span>
+        <h1>การพยากรณ์ความต้องการ & Simple Linear Regression</h1>
       </div>
     </div>
+    <div class="section-title">1. ประเภทความต้องการ (Independent vs Dependent)</div>
     <div class="content-block">
-      <p>คุณสามารถกดสลับไปมาระหว่าง <b>หน้าสรุปเนื้อหาหลัก</b>, <b>หน้าแบบทดสอบ 10 ข้อ</b> และ <b>หน้าทบทวนประเด็นสำคัญหน้าห้องสอบ</b> ได้ทันทีผ่านแถบเมนูด้านบนโดยไม่ต้องพิมพ์ URL ใหม่ครับ</p>
+      <ul>
+        <li><b>Independent Demand:</b> สินค้าสำเร็จรูป ลูกค้าภายนอก &rarr; <i>ต้องใช้สถิติพยากรณ์</i></li>
+        <li><b>Dependent Demand:</b> ชิ้นส่วน/วัตถุดิบ &rarr; <i>คำนวณจาก BOM ไม่ต้องพยากรณ์</i></li>
+      </ul>
     </div>
-    <div class="footer">
-      <span>Warehouse & Inventory Management</span>
-      <span>System Navigation</span>
+    <div class="section-title">2. โมเดล Time Series & Linear Regression</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Naïve:</b> <div class="formula-box">F(t+1) = D(t)</div></li>
+        <li><b>SMA / WMA / SES:</b> <div class="formula-box">F(t+1) = α·D(t) + (1 - α)·F(t)</div></li>
+        <li><b>Regression (y = a + bx):</b> ค่า b คือความชัน (อัตราการเติบโต) หากถามสัปดาห์ถัดไปให้แทนค่า x เพิ่มขึ้น</li>
+      </ul>
     </div>
+    <div class="footer"><span>Warehouse & Inventory Management</span><span>Index.html</span></div>
+  </div>
+
+  <div class="slide">
+    <div class="header">
+      <div>
+        <span class="badge">CHAPTER 3-1, 3-2 & 3-3</span>
+        <h1>EOQ, POQ, Quantity Discount & ROP</h1>
+      </div>
+    </div>
+    <div class="section-title">สรุปสูตรคำนวณคลังสินค้าคงคลัง</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Basic EOQ:</b> <div class="formula-box">EOQ = √(2DS / H)</div> (ณ จุด EOQ ต้นทุนสั่งซื้อ = ต้นทุนถือครอง)</li>
+        <li><b>POQ Model:</b> <div class="formula-box">Qp* = √(2DS / H) × √(p / (p - u))</div> (เงื่อนไข p > u เสมอ)</li>
+        <li><b>Quantity Discount:</b> คำนวณ EOQ แต่ละช่วง หากต่ำกว่าขั้นต่ำ ให้ปัดขึ้นเป็นขอบล่างของช่วง แล้วเทียบ TC รวม</li>
+        <li><b>ROP & Safety Stock:</b> <div class="formula-box">ROP = (d̄ × LT̄) + SS</div> และกรณีผันผวนทั้งคู่: <div class="formula-box">SS = Z · √(LT̄·σd² + d̄²·σLT²)</div></li>
+      </ul>
+    </div>
+    <div class="footer"><span>Warehouse & Inventory Management</span><span>Index.html</span></div>
   </div>
 
 </div>
