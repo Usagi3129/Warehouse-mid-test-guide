@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ทบทวนหน้าห้องสอบ: คลังสินค้าและสินค้าคงคลัง (3.html)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
+  
+  :root {
+    --bg-color: #0b0f19;
+    --card-bg: #1e293b;
+    --card-inner: #0f172a;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --accent-orange: #f59e0b;
+    --accent-green: #10b981;
+    --accent-red: #f87171;
+  }
+
+  body {
+    font-family: 'Sarabun', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1080px;
+  }
+
+  /* Navigation Bar เชื่อมข้ามหน้าเว็บ */
+  .global-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .nav-link {
+    background: #334155;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .nav-link.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  }
+
+  .slide {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+  }
+
+  .header {
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .badge {
+    background: #059669;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 8px 0 0 0;
+    font-size: 22px;
+    color: #ffffff;
+  }
+
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin: 20px 0 10px 0;
+  }
+
+  .content-block {
+    background: var(--card-inner);
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+
+  .formula-box {
+    background: #1e293b;
+    border: 1px solid #475569;
+    border-left: 4px solid var(--primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  th, td {
+    border: 1px solid #334155;
+    padding: 10px 12px;
+    text-align: left;
+  }
+
+  th {
+    background: #334155;
+    color: white;
+  }
+
+  td {
+    background: var(--card-inner);
+  }
+
+  ul, ol {
+    margin: 6px 0;
+    padding-left: 22px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  .footer {
+    margin-top: 24px;
+    border-top: 1px solid #334155;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--text-sub);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="global-nav">
+    <a href="index.html" class="nav-link">📂 หน้าหลัก (สรุปเนื้อหา)</a>
+    <a href="2.html" class="nav-link">📝 หน้า 2 (แบบทดสอบ 10 ข้อ)</a>
+    <a href="3.html" class="nav-link active">🎯 หน้า 3 (ทบทวนหน้าห้องสอบ)</a>
+  </div>
+
+  <div class="slide">
+    <div class="header">
+      <div>
+        <span class="badge">EXAM REVIEW GUIDE</span>
+        <h1>สรุปประเด็นสำคัญทบทวนหน้าห้องสอบ (ตามสไลด์อาจารย์)</h1>
+      </div>
+    </div>
+
+    <div class="section-title">1. จุดประสงค์หลักของการจัดการคลังสินค้ามีอะไรบ้าง?</div>
+    <div class="content-block">
+      <ul>
+        <li><b>ลดต้นทุนรวม (Cost Minimization):</b> ควบคุมและลดต้นทุนการถือครอง ต้นทุนการสั่งซื้อ และต้นทุนสินค้าเสียหาย/สูญหาย</li>
+        <li><b>รักษาระดับการให้บริการ (Customer Service):</b> มีสินค้าพร้อมส่งมอบให้ลูกค้าตรงเวลาและครบถ้วน</li>
+        <li><b>รองรับความไม่แน่นอน (Buffer):</b> ทำหน้าที่เป็นกันชนรองรับความผันผวนของความต้องการและเวลานำส่ง (Lead Time)</li>
+        <li><b>ประหยัดจากขนาด (Economies of Scale):</b> ช่วยให้สามารถสั่งซื้อหรือผลิตในปริมาณที่เหมาะสมเพื่อรับส่วนลดและลดต้นทุนขนส่ง</li>
+      </ul>
+    </div>
+
+    <div class="section-title">2. Demand Forecasting มีกี่แบบ แต่ละแบบเหมาะกับข้อมูลแบบไหน?</div>
+    <div class="content-block">
+      <ul>
+        <li><b>เชิงคุณภาพ (Qualitative):</b> ใช้ความคิดเห็นและประสบการณ์ผู้เชี่ยวชาญ (เช่น Delphi Method) &rarr; <i>เหมาะกับสินค้าใหม่ ไม่มีข้อมูลยอดขายในอดีต</i></li>
+        <li><b>เชิงปริมาณ - อุกรมเวลา (Time Series):</b> ใช้ข้อมูลยอดขายในอดีตมาคาดการณ์อนาคต เช่น SMA, WMA, Single Exponential Smoothing, Holt's Method &rarr; <i>เหมาะกับสินค้าที่มีข้อมูลประวัติและรูปแบบความต้องการชัดเจน</i></li>
+        <li><b>เชิงปริมาณ - เชิงเหตุผล (Causal/Regression):</b> ใช้สมการเส้นตรง ($y = a + bx$) หาความสัมพันธ์ระหว่างตัวแปร &rarr; <i>เหมาะกับสินค้าที่มีปัจจัยภายนอกหรือเวลาขับเคลื่อนยอดขายชัดเจน</i></li>
+      </ul>
+    </div>
+
+    <div class="section-title">3. การหาค่าความคลาดเคลื่อนของการพยากรณ์มีกี่แบบและสูตรอย่างไร?</div>
+    <div class="content-block">
+      <p>กำหนดให้ $e_t = D_t - F_t$ (ยอดจริง - ยอดพยากรณ์)</p>
+      <ul>
+        <li><b>MAD (Mean Absolute Deviation):</b> <div class="formula-box">MAD = &Sigma; |D<sub>t</sub> - F<sub>t</sub>| / n</div> (วัดความผิดพลาดเฉลี่ยโดยไม่สนทิศทางบวก/ลบ)</li>
+        <li><b>MSE (Mean Squared Error):</b> <div class="formula-box">MSE = &Sigma; (D<sub>t</sub> - F<sub>t</sub>)&sup2; / n</div> (ยกกำลังสองเพื่อให้น้ำหนักความผิดพลาดขนาดใหญ่เด่นชัดขึ้น)</li>
+        <li><b>MAPE (Mean Absolute Percentage Error):</b> <div class="formula-box">MAPE = [ &Sigma; (|D<sub>t</sub> - F<sub>t</sub>| / D<sub>t</sub>) / n ] &times; 100%</div> (แสดงผลเป็นเปอร์เซ็นต์ เพื่อเทียบความแม่นยำต่างสินค้ากันได้)</li>
+      </ul>
+    </div>
+
+    <div class="section-title">4. EOQ มีกี่แบบและใช้งานแตกต่างกันอย่างไร?</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Basic EOQ:</b> อุปสงค์คงที่ ส่งมอบครบครั้งเดียว ห้ามขาดมือ</li>
+        <li><b>EOQ with Backorders:</b> ยอมให้ของขาดมือชั่วคราว ลูกค้ารอรับของ ลดต้นทุนถือครอง</li>
+        <li><b>POQ / EPQ:</b> ผลิตเอง ทยอยผลิตทยอยใช้ (เงื่อนไข: อัตราผลิต $p$ ต้องมากกว่าอัตราใช้ $u$)</li>
+        <li><b>Quantity Discount:</b> ซัพพลายเออร์ให้ส่วนลดตามปริมาณ ต้องเช็คเงื่อนไขช่วงราคาและปัดขอบล่าง</li>
+      </ul>
+    </div>
+
+    <div class="section-title">5. ต้นทุนรวมต่อปีประกอบด้วยต้นทุนประเภทใดบ้าง?</div>
+    <div class="content-block">
+      <ul>
+        <li><b>ต้นทุนสั่งซื้อ/ตั้งเครื่องจักร (Ordering/Setup Cost):</b> $(D/Q) \cdot S$</li>
+        <li><b>ต้นทุนถือครอง (Holding/Carrying Cost):</b> $(Q/2) \cdot H$ *(หรือใช้ $I_{max}/2 \cdot H$ ใน POQ)*</li>
+        <li><b>ต้นทุนสินค้าขาดมือ (Stockout/Shortage Cost):</b> เกิดในกรณีโมเดลยอมให้ของขาด</li>
+        <li><b>ต้นทุนค่าซื้อสินค้า (Purchase Cost):</b> $D \cdot C$ *(ใช้ในการพิจารณา Quantity Discount)*</li>
+      </ul>
+    </div>
+
+    <div class="section-title">6. ROP และ SS มีกี่แบบและแตกต่างกันอย่างไร?</div>
+    <div class="content-block">
+      <p><b>สูตรหลัก:</b> $\text{ROP} = (\bar{d} \cdot \overline{LT}) + \text{SS}$ โดย Safety Stock ($\text{SS}$) แบ่งตามความผันผวน 4 กรณี:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>กรณีความผันผวน</th>
+            <th>สูตร Safety Stock (SS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Demand แน่นอน, LT แน่นอน</td><td><b>SS = 0</b></td></tr>
+          <tr><td>2. Demand ผันผวน, LT แน่นอน</td><td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; &sigma;<sub>d</sub> &middot; &radic;LT</span></td></tr>
+          <tr><td>3. Demand แน่นอน, LT ผันผวน</td><td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; d̄ &middot; &sigma;<sub>LT</sub></span></td></tr>
+          <tr><td>4. <b style="color:var(--accent-red);">ผันผวนทั้งคู่ (ออกสอบบ่อยสุด)</b></td><td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; &radic;[ LT̄&middot;&sigma;<sub>d</sub>&sup2; + d̄&sup2;&middot;&sigma;<sub>LT</sub>&sup2; ]</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <span>Warehouse & Inventory Management</span>
+      <span>File: 3.html</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
