@@ -1,49 +1,97 @@
+นี่คือโค้ดชุดใหม่สำหรับนำไปวางแทนในไฟล์ index.html หรือ 2.html ครับ รอบนี้ขยายเนื้อหาแบบจัดเต็ม เจาะลึกนิยาม ทฤษฎี กลไกตัวแปร ข้อแตกต่าง และจุดลวงในห้องสอบครบทุกบท (2-1 ถึง 3-3) แบบอ่านเข้าใจลึกซึ้ง ไม่ห้วนสั้นเกินไปครับ
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สรุปเตรียมสอบกลางภาค: คลังสินค้าและสินค้าคงคลัง</title>
+<title>คู่มือสรุปเจาะลึกเตรียมสอบกลางภาค: Warehouse & Inventory</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
   
+  :root {
+    --bg-color: #0b0f19;
+    --card-bg: #1e293b;
+    --card-inner: #0f172a;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --accent-orange: #f59e0b;
+    --accent-green: #10b981;
+    --accent-red: #f87171;
+  }
+
   body {
     font-family: 'Sarabun', -apple-system, sans-serif;
-    background-color: #0f172a;
-    color: #f8fafc;
+    background-color: var(--bg-color);
+    color: var(--text-main);
     margin: 0;
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
   }
 
-  .slide-container {
+  .container {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1080px;
+  }
+
+  .nav-tabs {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .tab-btn {
+    background: #1e293b;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
   }
 
   .slide {
-    background: #1e293b;
+    display: none;
+    background: var(--card-bg);
     border-radius: 16px;
-    padding: 24px 28px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    padding: 30px;
     border: 1px solid #334155;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .slide.active {
+    display: block;
   }
 
   .header {
-    border-bottom: 2px solid #3b82f6;
-    padding-bottom: 10px;
-    margin-bottom: 16px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .badge {
     background: #2563eb;
-    color: #ffffff;
+    color: white;
     padding: 4px 12px;
     border-radius: 6px;
     font-size: 13px;
@@ -56,330 +104,397 @@
     color: #ffffff;
   }
 
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin: 18px 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  @media (max-width: 768px) {
-    .grid-2 {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .card {
-    background: #0f172a;
+  .content-block {
+    background: var(--card-inner);
     border: 1px solid #334155;
-    border-left: 5px solid #3b82f6;
-    border-radius: 8px;
-    padding: 14px 16px;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
   }
 
-  .card-warning {
+  .content-block p {
+    margin: 0 0 10px 0;
+  }
+
+  .content-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .formula-box {
+    background: #1e293b;
+    border: 1px solid #475569;
+    border-left: 4px solid var(--primary);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  .note-warning {
     background: #291b00;
     border: 1px solid #78350f;
-    border-left: 5px solid #f59e0b;
+    border-left: 4px solid var(--accent-orange);
     border-radius: 8px;
-    padding: 14px 16px;
-    grid-column: span 2;
-  }
-
-  @media (max-width: 768px) {
-    .card-warning {
-      grid-column: span 1;
-    }
-  }
-
-  .card-title {
-    font-weight: 700;
-    font-size: 16px;
-    color: #60a5fa;
-    margin-bottom: 8px;
-  }
-
-  .formula {
-    background: #334155;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 700;
-    color: #f8fafc;
-    display: inline-block;
-    margin: 3px 0;
-    font-size: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    color: #fef3c7;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 8px;
-    font-size: 13px;
+    margin-top: 12px;
+    font-size: 14px;
   }
 
   th, td {
     border: 1px solid #334155;
-    padding: 8px 10px;
+    padding: 10px 12px;
     text-align: left;
   }
 
   th {
     background: #334155;
-    color: #ffffff;
+    color: white;
+    font-weight: 600;
   }
 
   td {
-    background: #0f172a;
+    background: var(--card-inner);
   }
 
   ul, ol {
-    margin: 4px 0;
-    padding-left: 20px;
-    font-size: 14px;
-    line-height: 1.6;
+    margin: 6px 0;
+    padding-left: 22px;
   }
 
   li {
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .footer {
-    margin-top: 14px;
+    margin-top: 24px;
+    border-top: 1px solid #334155;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
-    font-size: 11px;
-    color: #94a3b8;
-    border-top: 1px solid #334155;
-    padding-top: 6px;
+    font-size: 12.5px;
+    color: var(--text-sub);
   }
 </style>
 </head>
 <body>
 
-<div class="slide-container">
+<div class="container">
 
-  <!-- SLIDE 1 -->
-  <div class="slide">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchSlide(0)">บทที่ 2-1: ความต้องการ & Time Series</button>
+    <button class="tab-btn" onclick="switchSlide(1)">บทที่ 2-2: Regression & พยากรณ์</button>
+    <button class="tab-btn" onclick="switchSlide(2)">บทที่ 3-1: โครงสร้างต้นทุน & Basic EOQ</button>
+    <button class="tab-btn" onclick="switchSlide(3)">บทที่ 3-2: POQ, ขาดมือ & ส่วนลด</button>
+    <button class="tab-btn" onclick="switchSlide(4)">บทที่ 3-3: ROP & สต๊อกปลอดภัย</button>
+  </div>
+
+  <!-- SLIDE 1: CH 2-1 -->
+  <div class="slide active">
     <div class="header">
-      <span class="badge">CHAPTER 2-1</span>
-      <h1>Demand Forecasting: พื้นฐาน & อนุกรมเวลา (Time Series)</h1>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. ประเภทความต้องการ (Types of Demand)</div>
-        <ul>
-          <li><b>Independent:</b> สินค้าสำเร็จรูป เกิดจากลูกค้าภายนอก &rarr; <span style="color:#60a5fa; font-weight:bold;">ต้องพยากรณ์</span></li>
-          <li><b>Dependent:</b> วัตถุดิบ/ชิ้นส่วน &rarr; <span style="color:#4ade80; font-weight:bold;">คำนวณจาก BOM ไม่ต้องพยากรณ์</span></li>
-        </ul>
-        <div class="card-title" style="margin-top: 10px;">2. รูปแบบความต้องการ (Demand Patterns)</div>
-        <ul>
-          <li><b>Constant:</b> นิ่ง เสถียร ไม่เปลี่ยนตามเวลา</li>
-          <li><b>Trend:</b> เพิ่มหรือลดลงต่อเนื่อง</li>
-          <li><b>Seasonality:</b> รอบเวลาแน่นอน คาดเดาได้</li>
-          <li><b>Cyclical:</b> รอบวัฏจักรเศรษฐกิจ (> 1 ปี)</li>
-          <li><b>Random:</b> ผันแปรสุ่ม ชั่วคราว คาดเดาไม่ได้</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">3. สูตรคำนวณ Time Series</div>
-        <ul>
-          <li><b>Naïve:</b> <span class="formula">F(t+1) = D(t)</span></li>
-          <li><b>SMA n งวด:</b> <span class="formula">F(t+1) = ผลรวม D / n</span></li>
-          <li><b>WMA:</b> <span class="formula">F(t+1) = Σ (W<sub>i</sub> × D<sub>i</sub>)</span> (ΣW = 1)</li>
-          <li><b>Exponential Smoothing:</b><br><span class="formula">F(t+1) = α·D(t) + (1 - α)·F(t)</span>
-            <ul>
-              <li>α ต่ำ (ใกล้ 0) &rarr; เชื่อข้อมูลเก่า นิ่ง ไม่แกว่ง</li>
-              <li>α สูง (ใกล้ 1) &rarr; ไวต่อข้อมูลล่าสุด ตอบสนองเร็ว</li>
-            </ul>
-          </li>
-          <li><b>Holt’s Method:</b> <span class="formula">F(t+m) = S(t) + m·T(t)</span></li>
-        </ul>
+      <div>
+        <span class="badge">CHAPTER 2-1</span>
+        <h1>การพยากรณ์ความต้องการ (Demand Forecasting & Time Series)</h1>
       </div>
     </div>
+
+    <div class="section-title">1. ประเภทของความต้องการและธรรมชาติการวางแผน</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Independent Demand (ความต้องการอิสระ):</b> เป็นอุปสงค์ที่เกิดขึ้นจากลูกค้าภายนอกองค์กรโดยตรง ไม่ขึ้นอยู่กับความต้องการสินค้าตัวอื่น เช่น รถยนต์พร้อมจำหน่าย, ยาสำเร็จรูป หรือสินค้าบนชั้นวาง <i>ลักษณะสำคัญคือไม่สามารถคำนวณได้อย่างแน่นอน ต้องใช้ "การพยากรณ์ทางสถิติและข้อมูลในอดีต" เข้ามาประมาณการ</i></li>
+        <li><b>Dependent Demand (ความต้องการต่อเนื่อง):</b> เป็นอุปสงค์ของวัตถุดิบ ชิ้นส่วนประกอบ หรือบรรจุภัณฑ์ ที่ถูกใช้เพื่อผลิตสินค้าสำเร็จรูป เช่น ความต้องการยางรถยนต์ 4 เส้นต่อรถยนต์ 1 คัน <i>ลักษณะสำคัญคือไม่ต้องพยากรณ์ แต่คำนวณได้แม่นยำจากโครงสร้างสูตรการผลิต (BOM: Bill of Materials) และระบบวางแผนความต้องการวัสดุ (MRP)</i></li>
+      </ul>
+    </div>
+
+    <div class="section-title">2. รูปแบบของข้อมูลความต้องการ (Demand Patterns)</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Constant (คงที่):</b> ข้อมูลมีค่าเฉลี่ยสม่ำเสมอตลอดช่วงเวลา ไม่มีการเติบโตหรือลดลงชัดเจน เหมาะกับสินค้าอุปโภคบริโภคพื้นฐาน</li>
+        <li><b>Trend (แนวโน้ม):</b> ข้อมูลมีการปรับตัวเพิ่มขึ้นหรือลดลงอย่างต่อเนื่องในระยะยาว เกิดจากการขยายตัวของตลาด หรือความนิยมที่เปลี่ยนไป</li>
+        <li><b>Seasonality (ฤดูกาล):</b> ข้อมูลมีความผันผวนซ้ำๆ ในรอบเวลาที่แน่นอน เช่น ยอดขายเสื้อกันหนาวพุ่งสูงทุกเดือนธันวาคม หรือยอดขายเครื่องดื่มเพิ่มขึ้นทุกสุดสัปดาห์</li>
+        <li><b>Cyclical (วัฏจักร):</b> รูปแบบคล้ายคลื่นที่สัมพันธ์กับสภาวะเศรษฐกิจมหภาค (รุ่งเรือง-ถดถอย) มีรอบระยะเวลานานกว่า 1 ปี และคาดเดารอบเวลาแน่นอนได้ยาก</li>
+        <li><b>Random (ผันแปรสุ่ม):</b> เหตุการณ์ผิดปกติที่เกิดขึ้นชั่วคราวและคาดเดาไม่ได้ เช่น ภัยพิบัติ หรือวิกฤตการณ์ฉุกเฉิน</li>
+      </ul>
+    </div>
+
+    <div class="section-title">3. โมเดลการพยากรณ์อนุกรมเวลา (Time Series Forecasting)</div>
+    <div class="content-block">
+      <p><b>1) Naïve Model:</b> ใช้ข้อมูลยอดจริงของงวดล่าสุดเป็นตัวแทนพยากรณ์งวดถัดไปโดยตรง</p>
+      <div class="formula-box">สูตร: F(t+1) = D(t)</div>
+
+      <p><b>2) Simple Moving Average (SMA n งวด):</b> คำนวณค่าเฉลี่ยของยอดจริงย้อนหลัง n คาบเวลา โดยให้น้ำหนักทุกงวดเท่ากัน เหมาะกับข้อมูลที่ไม่มีแนวโน้ม</p>
+      <div class="formula-box">สูตร: F(t+1) = [ D(t) + D(t-1) + ... + D(t-n+1) ] / n</div>
+
+      <p><b>3) Weighted Moving Average (WMA):</b> กำหนดค่าน้ำหนัก (W) ให้แต่ละงวดไม่เท่ากัน โดยงวดที่ใกล้ปัจจุบันที่สุดควรได้น้ำหนักมากที่สุด โดยผลรวมน้ำหนักต้องเท่ากับ 1 เสมอ (&Sigma;W = 1.0)</p>
+      <div class="formula-box">สูตร: F(t+1) = &Sigma; (W<sub>i</sub> &times; D<sub>i</sub>)</div>
+
+      <p><b>4) Single Exponential Smoothing:</b> ปรับค่าพยากรณ์โดยถ่วงน้ำหนักระหว่างยอดจริงล่าสุดและค่าพยากรณ์เดิม</p>
+      <div class="formula-box">สูตร: F(t+1) = &alpha; &middot; D(t) + (1 - &alpha;) &middot; F(t)</div>
+      <ul>
+        <li><b>กรณี &alpha; ต่ำ (ใกล้ 0 เช่น 0.1 - 0.2):</b> ให้ความสำคัญกับข้อมูลในอดีต เส้นพยากรณ์จะนิ่ง ไม่แกว่งตามสัญญาณรบกวน เหมาะกับข้อมูลที่ผันแปรสุ่มสูง</li>
+        <li><b>กรณี &alpha; สูง (ใกล้ 1 เช่น 0.8 - 0.9):</b> ตอบสนองต่อยอดขายจริงล่าสุดรวดเร็ว เหมาะกับตลาดที่มีการเปลี่ยนระดับอุปสงค์ฉับพลัน</li>
+      </ul>
+
+      <p><b>5) Holt’s Method (พยากรณ์กรณีมี Trend):</b> แยกการคำนวณออกเป็น 2 องค์ประกอบ คือ ระดับข้อมูลเฉลี่ย S(t) และความชันแนวโน้ม T(t)</p>
+      <div class="formula-box">พยากรณ์ไปข้างหน้า m งวด: F(t+m) = S(t) + m &middot; T(t)</div>
+    </div>
+
     <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 1 / 5</span>
+      <span>Warehouse & Inventory Management</span>
+      <span>Section 2-1</span>
     </div>
   </div>
 
-  <!-- SLIDE 2 -->
+  <!-- SLIDE 2: CH 2-2 -->
   <div class="slide">
     <div class="header">
-      <span class="badge">CHAPTER 2-2</span>
-      <h1>Simple Linear Regression (y = a + bx)</h1>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. ตัวแปรสมการเส้นตรง</div>
-        <ul>
-          <li><b>x:</b> คาบเวลา (สัปดาห์ที่ 1, 2, 3...)</li>
-          <li><b>y:</b> ปริมาณขนส่งจริง (ตัน)</li>
-          <li><b>b:</b> ความชัน = <span style="color:#60a5fa; font-weight:bold;">อัตราการเติบโตต่อสัปดาห์</span></li>
-          <li><b>a:</b> จุดตัดแกน y (ค่าเริ่มต้น)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. สูตรคำนวณ</div>
-        <ul>
-          <li><span class="formula">b = [ n·Σxy - (Σx)(Σy) ] / [ n·Σx² - (Σx)² ]</span></li>
-          <li><span class="formula">a = ȳ - b·x̄</span></li>
-          <li><small style="color:#94a3b8;">x̄ = Σx / n , ȳ = Σy / n</small></li>
-        </ul>
-      </div>
-      <div class="card-warning">
-        <div class="card-title" style="color:#fbbf24;">⚠️ ทริคห้องสอบ (ข้อ 1)</div>
-        <ul>
-          <li>เมื่อ n = 5 ตัวส่วนของสูตร b จะเท่ากับ <b>5(55) - (15)² = 50 เสมอ</b></li>
-          <li>ถ้าถามหา <b>"เส้นทางที่เติบโตสูงที่สุด"</b> &rarr; เลือกเส้นทางที่มี <b>ค่า b สูงสุด</b></li>
-          <li>พยากรณ์สัปดาห์ที่ 6 &rarr; แทน <b>x = 6</b> ลงในสมการ</li>
-        </ul>
+      <div>
+        <span class="badge">CHAPTER 2-2</span>
+        <h1>การวิเคราะห์การถดถอยเชิงเส้น (Simple Linear Regression)</h1>
       </div>
     </div>
+
+    <div class="section-title">1. โครงสร้างสมการและการแปลความหมายทางกายภาพ</div>
+    <div class="content-block">
+      <div class="formula-box" style="text-align: center; font-size: 16px;">สมการ: &ycirc; = a + bx</div>
+      <ul>
+        <li><b>x (ตัวแปรอิสระ):</b> คาบเวลา หรือ สัปดาห์ที่ 1, 2, 3, ...</li>
+        <li><b>y (ตัวแปรตาม):</b> ปริมาณความต้องการ หรือ ปริมาณการขนส่งจริง (ตัน/หน่วย)</li>
+        <li><b>b (ความชัน - Slope):</b> หมายถึง <b>"อัตราการเติบโตหรือการเปลี่ยนแปลงของปริมาณสินค้าต่อหนึ่งหน่วยเวลา"</b> หาก b เป็นบวกแสดงว่าสินค้าเติบโตต่อเนื่อง หาก b เป็นลบแสดงว่าปริมาณลดลง</li>
+        <li><b>a (จุดตัดแกนตั้ง - Y-Intercept):</b> ระดับปริมาณสินค้าตั้งต้นทางทฤษฎี ณ จุดเวลา x = 0</li>
+      </ul>
+    </div>
+
+    <div class="section-title">2. สูตรการคำนวณค่าสัมประสิทธิ์ a และ b</div>
+    <div class="content-block">
+      <p><b>สูตรคำนวณค่าความชัน (b):</b></p>
+      <div class="formula-box">b = [ n&Sigma;xy - (&Sigma;x)(&Sigma;y) ] / [ n&Sigma;x&sup2; - (&Sigma;x)&sup2; ]</div>
+      <p><b>สูตรคำนวณจุดตัดแกน (a):</b></p>
+      <div class="formula-box">a = &yuml; - b &middot; x̄ &nbsp;&nbsp; (โดยที่ x̄ = &Sigma;x / n และ &yuml; = &Sigma;y / n)</div>
+    </div>
+
+    <div class="note-warning">
+      <b>⚠️ จุดสังเกตและข้อควรระวังในห้องสอบ (โจทย์ประเภทตารางเส้นทางขนส่ง):</b>
+      <ul>
+        <li>หากโจทย์ให้ข้อมูลระยะเวลาเท่ากัน เช่น ข้อมูลย้อนหลัง 5 สัปดาห์ (n = 5) ค่าตัวส่วนของสูตร b จะคงที่เสมอ คือ: <b>5(55) - (15)&sup2; = 275 - 225 = 50</b> ทำให้คำนวณเปรียบเทียบแต่ละเส้นทางได้รวดเร็ว</li>
+        <li>คำถาม <b>"เส้นทางใดมีแนวโน้มการเติบโตของปริมาณขนส่งสูงที่สุด"</b> &rarr; ให้ตอบเส้นทางที่มี <b>ค่า b (ความชัน) มากที่สุด</b> ไม่ใช่เส้นทางที่มียอดรวม (&Sigma;y) สูงสุด</li>
+        <li>คำถาม <b>"จงพยากรณ์ปริมาณสินค้าในสัปดาห์ถัดไป"</b> &rarr; สังเกตตัวแปรเวลา เช่น ข้อมูลเดิมมี 5 สัปดาห์ หากถามสัปดาห์ถัดไปต้องแทนค่า <b>x = 6</b> หรือสัปดาห์ที่เจ็ดให้แทน <b>x = 7</b></li>
+      </ul>
+    </div>
+
     <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 2 / 5</span>
+      <span>Warehouse & Inventory Management</span>
+      <span>Section 2-2</span>
     </div>
   </div>
 
-  <!-- SLIDE 3 -->
+  <!-- SLIDE 3: CH 3-1 -->
   <div class="slide">
     <div class="header">
-      <span class="badge">CHAPTER 3-1 & 3-2</span>
-      <h1>Basic EOQ & แบบจำลองยอมให้ของขาดมือ (Backorders)</h1>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. Basic EOQ (ของไม่ขาดมือ)</div>
-        <ul>
-          <li>ปริมาณสั่งซื้อ: <span class="formula">EOQ = √( 2DS / H )</span> &nbsp; <small>(H = h × C)</small></li>
-          <li>ต้นทุนรวม: <span class="formula">TC = (D/Q)·S + (Q/2)·H</span></li>
-          <li>จำนวนครั้งสั่ง/ปี = D / Q</li>
-          <li>ระยะเวลารอบสั่ง = (Q / D) × วันทำงานต่อปี</li>
-          <li><i>* ณ จุด EOQ: ต้นทุนสั่งซื้อ = ต้นทุนถือครองพอดี</i></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. EOQ with Backorders</div>
-        <ul>
-          <li><b>P:</b> ต้นทุนของขาดมือ (บาท/หน่วย/ปี)</li>
-          <li>ปริมาณสั่งซื้อ: <br><span class="formula">Q* = √( [2DS/H] × [(H+P)/P] )</span></li>
-          <li>ขาดมือสูงสุด: <span class="formula">B* = Q* × [ H / (H + P) ]</span></li>
-          <li>สต็อกสูงสุด: <span class="formula">S<sub>max</sub> = Q* - B*</span></li>
-          <li>ต้นทุนรวม: <br><span class="formula">TC = (D/Q*)S + [S<sub>max</sub>²/(2Q*)]H + [B*²/(2Q*)]P</span></li>
-        </ul>
+      <div>
+        <span class="badge">CHAPTER 3-1</span>
+        <h1>โครงสร้างต้นทุนและแบบจำลอง Basic EOQ</h1>
       </div>
     </div>
+
+    <div class="section-title">1. ต้นทุนที่เกี่ยวข้องกับการจัดการสินค้าคงคลัง</div>
+    <div class="content-block">
+      <ul>
+        <li><b>1) Ordering Cost / Setup Cost (S):</b> ต้นทุนการสั่งซื้อหรือตั้งเครื่องจักร เกิดขึ้นเป็นต่อครั้ง (บาท/ครั้ง) เช่น ค่าเอกสาร ตรวจรับสินค้า ติดต่อประสานงาน ค่าปรับตั้งเครื่อง <i>ต้นทุนรวมต่อปีจะลดลงหากสั่งซื้อครั้งละล็อตใหญ่ เพราะความถี่ในการสั่งลดลง</i></li>
+        <li><b>2) Holding Cost / Carrying Cost (H):</b> ต้นทุนการเก็บรักษา (บาท/หน่วย/ปี) ได้แก่ ค่าเช่าคลัง ประกันภัย ดอกเบี้ยเงินจม ค่าสินค้าเสื่อมสภาพ/หมดอายุ หากระบุเป็นอัตราร้อยละ (h) จะคำนวณจาก H = h &times; C (โดย C คือราคาสินค้าต่อหน่วย) <i>ต้นทุนรวมต่อปีจะแปรผันตรงตามปริมาณสั่งซื้อ สั่งล็อตใหญ่ยิ่งแบกรับต้นทุนนี้สูง</i></li>
+        <li><b>3) Shortage / Stockout Cost (P):</b> ต้นทุนความเสียหายเมื่อสินค้าขาดมือ เช่น สูญเสียกำไร เสียชื่อเสียง หรือค่าปรับส่งมอบล่าช้า</li>
+      </ul>
+    </div>
+
+    <div class="section-title">2. แบบจำลอง Basic EOQ (Economic Order Quantity)</div>
+    <div class="content-block">
+      <p><b>ข้อสมมติฐานหลัก:</b> อุปสงค์คงที่สม่ำเสมอ, เวลานำ (Lead Time) คงที่, ได้รับสินค้าครบพร้อมกันทั้งล็อตทันที (Instantaneous replenishment), ไม่อนุญาตให้สินค้าขาดมือ</p>
+      
+      <div class="formula-box">ปริมาณการสั่งซื้อที่ประหยัดที่สุด: EOQ (Q*) = &radic;[ (2 &middot; D &middot; S) / H ]</div>
+      
+      <p><b>สูตรความสัมพันธ์ต่อเนื่องที่สำคัญ:</b></p>
+      <ul>
+        <li><b>ระดับสินค้าคงคลังเฉลี่ย:</b> Q / 2</li>
+        <li><b>จำนวนครั้งที่สั่งซื้อต่อปี (N):</b> D / Q</li>
+        <li><b>ระยะเวลาระหว่างรอบสั่งซื้อ (T):</b> (Q / D) &times; จำนวนวันทำงานต่อปี</li>
+        <li><b>ต้นทุนรวมต่อปี (Total Cost):</b> TC = (D / Q) &middot; S + (Q / 2) &middot; H</li>
+      </ul>
+
+      <div class="formula-box" style="border-left-color: var(--accent-green);">
+        <b>กฎความสมดุล ณ จุด EOQ:</b><br>
+        ต้นทุนการสั่งซื้อรวมต่อปี [ (D/Q)&middot;S ] จะมีมูลค่า <b>เท่ากันพอดี</b> กับต้นทุนการถือครองรวมต่อปี [ (Q/2)&middot;H ] และเป็นจุดที่เส้นต้นทุนรวม (TC) ต่ำที่สุด
+      </div>
+    </div>
+
     <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 3 / 5</span>
+      <span>Warehouse & Inventory Management</span>
+      <span>Section 3-1</span>
     </div>
   </div>
 
-  <!-- SLIDE 4 -->
+  <!-- SLIDE 4: CH 3-2 -->
   <div class="slide">
     <div class="header">
-      <span class="badge">CHAPTER 3-2</span>
-      <h1>POQ Model (ผลิตไปใช้ไป) & Quantity Discount</h1>
-    </div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">1. POQ / EPQ (ทยอยผลิต ทยอยใช้)</div>
-        <ul>
-          <li>เงื่อนไข: <b>p (อัตราผลิต) > d (อัตราใช้)</b></li>
-          <li>ปริมาณผลิต: <br><span class="formula">Q<sub>p</sub>* = √( 2DS / H ) × √( p / (p - d) )</span></li>
-          <li>สต็อกสูงสุด: <span class="formula">I<sub>max</sub> = Q<sub>p</sub>* × [ (p - d) / p ]</span></li>
-          <li>ต้นทุนรวม: <span class="formula">TC = (D/Q<sub>p</sub>*)·S + (I<sub>max</sub>/2)·H</span></li>
-          <li><small style="color:#fbbf24; font-weight:bold;">* ระวัง: D ต้องเป็นต่อปี (เดือน × 12) ส่วน p และ d ต้องเป็นต่อวัน</small></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">2. Quantity Discount (ส่วนลดปริมาณ)</div>
-        <ol>
-          <li>คำนวณ EOQ แต่ละช่วงราคา: <span class="formula">EOQ = √( 2DS / H )</span></li>
-          <li><b>ตรวจช่วงสั่งซื้อ:</b>
-            <ul>
-              <li>ถ้าอยู่ในช่วง &rarr; ใช้เลขนั้น</li>
-              <li>ถ้าต่ำกว่าขั้นต่ำ &rarr; <b style="color:#fbbf24;">ปัดขึ้นเป็นขอบล่างของช่วงทันที</b></li>
-            </ul>
-          </li>
-          <li>คิดต้นทุนรวม: <span class="formula">TC = (D/Q)S + (Q/2)H + DC</span></li>
-          <li>เลือกสั่งซื้อที่ให้ <b>TC ต่ำที่สุด</b></li>
-        </ol>
+      <div>
+        <span class="badge">CHAPTER 3-2</span>
+        <h1>แบบจำลอง Backorders, POQ และ Quantity Discount</h1>
       </div>
     </div>
+
+    <div class="section-title">1. EOQ with Planned Backorders (ยอมให้สินค้าขาดมือได้ชั่วคราว)</div>
+    <div class="content-block">
+      <p>ใช้เมื่อลูกค้ายินดีรอรับสินค้าเมื่อมีของเข้ามา (Backorder) โดยไม่ยกเลิกคำสั่งซื้อ เหมาะสำหรับสินค้าที่มีต้นทุนถือครอง (H) สูงมาก จนการยอมให้ของขาดมือเพื่อลดระดับสต็อกเฉลี่ยมีความคุ้มค่าเชิงเศรษฐศาสตร์มากกว่า</p>
+      <div class="formula-box">
+        ขนาดสั่งซื้อที่เหมาะสม: Q* = &radic;[ (2DS / H) &times; ((H + P) / P) ]<br>
+        ปริมาณขาดมือสูงสุด: B* = Q* &times; [ H / (H + P) ]<br>
+        ระดับสินค้าคงคลังสูงสุด: S<sub>max</sub> = Q* - B*
+      </div>
+      <p><b>ข้อสังเกต:</b> ค่า Q* ของกรณีนี้จะมีขนาด <i>ใหญ่กว่า</i> Basic EOQ ปกติเสมอ เนื่องจากตัวคูณ &radic;((H+P)/P) มีค่ามากกว่า 1</p>
+    </div>
+
+    <div class="section-title">2. POQ / EPQ Model (แบบจำลองการทยอยผลิตและทยอยใช้)</div>
+    <div class="content-block">
+      <p>ใช้เมื่อโรงงานผลิตสินค้าเองภายในองค์กร วัตถุดิบหรือสินค้าจะทยอยเข้าสู่คลังอย่างต่อเนื่องตามอัตราการผลิต (p) พร้อมๆ กับที่มีการเบิกจ่ายออกไปใช้งานตามอัตราการบริโภค (u หรือ d)</p>
+      <ul>
+        <li><b>เงื่อนไขทางกายภาพ:</b> <b>อัตราการผลิตต่อวัน (p) ต้องมากกว่าอัตราการใช้ต่อวัน (u) เสมอ (p > u)</b> เพื่อให้สต็อกสามารถสะสมขึ้นมาได้ หาก p &le; u สินค้าจะขาดมือทันทีและไม่เกิดระดับสต็อกสูงสุด</li>
+      </ul>
+      <div class="formula-box">
+        ปริมาณผลิตที่ประหยัดที่สุด: Q<sub>p</sub>* = &radic;[ (2DS / H) &times; (p / (p - u)) ]<br>
+        ระดับสต็อกสูงสุด (I<sub>max</sub>): Q<sub>p</sub>* &times; [ (p - u) / p ]<br>
+        ระยะเวลาเดินเครื่องผลิต (Run time): Q<sub>p</sub>* / p วัน
+      </div>
+      <p><b>ข้อควรระวังเรื่องหน่วย:</b> ความต้องการรวม (D) ต้องปรับเป็นหน่วยรายปีเสมอ ส่วนอัตราผลิต (p) และอัตราใช้ (u) ต้องแปลงเป็นหน่วยต่อวัน</p>
+    </div>
+
+    <div class="section-title">3. Quantity Discount (ส่วนลดตามปริมาณการสั่งซื้อ)</div>
+    <div class="content-block">
+      <p>ซัพพลายเออร์เสนอราคาต่อหน่วยถูกลงเมื่อสั่งซื้อล็อตใหญ่ ขั้นตอนการตัดสินใจ 4 ขั้นตอน:</p>
+      <ol>
+        <li>คำนวณค่า EOQ ของแต่ละช่วงราคา: EOQ = &radic;(2DS / H) (ระวัง: หาก H = h&times;C ค่า H จะเปลี่ยนตามราคาสินค้า C ในแต่ละช่วง)</li>
+        <li>ตรวจสอบความสอดคล้อง (Feasibility):
+          <ul>
+            <li>หาก EOQ ตกอยู่ในช่วงราคาของตัวเอง &rarr; ให้ใช้ค่านั้นเป็นจุดสั่งซื้อ</li>
+            <li>หาก EOQ <b>ต่ำกว่าขั้นต่ำของช่วง</b> &rarr; <b>ให้ปัดขึ้นเป็นค่าขอบล่าง (Lower boundary) ของช่วงนั้นทันที</b> เพื่อให้ได้สิทธิ์รับส่วนลด</li>
+            <li>หาก EOQ สูงกว่าช่วง &rarr; ไม่พิจารณาจุดนี้</li>
+          </ul>
+        </li>
+        <li>คำนวณต้นทุนรวมทั้งหมด (TC รวมค่าซื้อ): TC = (D/Q)&middot;S + (Q/2)&middot;H + D&middot;C</li>
+        <li><b>เลือกปริมาณสั่งซื้อ Q ที่ให้ค่าต้นทุนรวม (TC) ต่ำที่สุด</b></li>
+      </ol>
+    </div>
+
     <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 4 / 5</span>
+      <span>Warehouse & Inventory Management</span>
+      <span>Section 3-2</span>
     </div>
   </div>
 
-  <!-- SLIDE 5 -->
+  <!-- SLIDE 5: CH 3-3 -->
   <div class="slide">
     <div class="header">
-      <span class="badge">CHAPTER 3-3</span>
-      <h1>จุดสั่งซื้อใหม่ (ROP) & สต๊อกปลอดภัย (Safety Stock)</h1>
-    </div>
-    <div style="margin-bottom: 14px;">
-      <div class="card">
-        <div class="card-title">สูตรหลัก: <span class="formula">ROP = (d̄ × LT̄) + SS</span></div>
-        <table>
-          <thead>
-            <tr>
-              <th>กรณี</th>
-              <th>สถานะ Demand & Lead Time</th>
-              <th>สูตร Safety Stock (SS)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Demand แน่นอน, LT แน่นอน</td>
-              <td><b>SS = 0</b></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Demand ผันผวน, LT แน่นอน</td>
-              <td><span class="formula">SS = Z · σ<sub>d</sub> · √LT</span></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Demand แน่นอน, LT ผันผวน</td>
-              <td><span class="formula">SS = Z · d̄ · σ<sub>LT</sub></span></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><b style="color:#f87171;">ผันผวนทั้งคู่ (ออกสอบบ่อย)</b></td>
-              <td><span class="formula">SS = Z · √( LT̄·σ<sub>d</sub>² + d̄²·σ<sub>LT</sub>² )</span></td>
-            </tr>
-          </tbody>
-        </table>
+      <div>
+        <span class="badge">CHAPTER 3-3</span>
+        <h1>จุดสั่งซื้อใหม่ (ROP) และการจัดการสต๊อกปลอดภัย</h1>
       </div>
     </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">ค่า Z ตาม Service Level</div>
-        <ul>
-          <li>90% &rarr; <b>Z = 1.28</b></li>
-          <li>95% &rarr; <b>Z = 1.65</b> (ใช้บ่อยสุด)</li>
-          <li>97.5% &rarr; <b>Z = 1.96</b></li>
-          <li>99% &rarr; <b>Z = 2.33</b></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">สูตรสถิติจากตารางความถี่</div>
-        <ul>
-          <li>เฉลี่ยถ่วงน้ำหนัก: <span class="formula">X̄ = Σ(f<sub>i</sub>·X<sub>i</sub>) / Σf<sub>i</sub></span></li>
-          <li>ส่วนเบี่ยงเบนมาตรฐาน: <br><span class="formula">σ = √[ Σ f<sub>i</sub>(X<sub>i</sub> - X̄)² / (n - 1) ]</span></li>
-        </ul>
-      </div>
+    <div class="section-title">1. ความหมายของ Reorder Point (ROP)</div>
+    <div class="content-block">
+      <p>ระดับสต็อกที่เมื่อสินค้าลดลงมาแตะถึงจุดนี้ จะต้องเริ่มออกใบสั่งซื้อล็อตใหม่ทันที เพื่อให้ของรอบใหม่ส่งมาถึงจังหวะที่สต็อกเดิมหมดพอดี</p>
+      <div class="formula-box">โครงสร้างสมการหลัก: ROP = (ความต้องการเฉลี่ยช่วงรอของ) + สต๊อกปลอดภัย = (d̄ &times; LT̄) + SS</div>
     </div>
+
+    <div class="section-title">2. การคำนวณ Safety Stock (SS) แยกตาม 4 กรณีความผันผวน</div>
+    <div class="content-block">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 12%;">กรณี</th>
+            <th style="width: 48%;">สถานการณ์ความไม่แน่นอน</th>
+            <th style="width: 40%;">สูตรสต๊อกปลอดภัย (Safety Stock: SS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>กรณี 1</b></td>
+            <td>Demand แน่นอนคงที่, เวลานำ (LT) แน่นอนคงที่</td>
+            <td><b>SS = 0</b> &nbsp; (ROP = d &times; LT)</td>
+          </tr>
+          <tr>
+            <td><b>กรณี 2</b></td>
+            <td>Demand ผันผวน (&sigma;<sub>d</sub>), แต่เวลานำ (LT) แน่นอน</td>
+            <td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; &sigma;<sub>d</sub> &middot; &radic;LT</span></td>
+          </tr>
+          <tr>
+            <td><b>กรณี 3</b></td>
+            <td>Demand แน่นอนคงที่, แต่เวลานำผันผวน (&sigma;<sub>LT</sub>)</td>
+            <td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; d̄ &middot; &sigma;<sub>LT</sub></span></td>
+          </tr>
+          <tr>
+            <td><b>กรณี 4</b></td>
+            <td><b style="color:var(--accent-red);">ผันผวนทั้งคู่ (ออกสอบบ่อยที่สุด)</b></td>
+            <td><span class="formula-box" style="padding:2px 6px;">SS = Z &middot; &radic;[ (LT̄ &middot; &sigma;<sub>d</sub>&sup2;) + (d̄&sup2; &middot; &sigma;<sub>LT</sub>&sup2;) ]</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 14px;"><b>ค่าสัมประสิทธิ์ความปลอดภัย (Z) ตามระดับการให้บริการ (Service Level):</b></p>
+      <ul>
+        <li>Service Level 90% &rarr; <b>Z = 1.28</b></li>
+        <li>Service Level 95% &rarr; <b>Z = 1.65</b> (ค่ามาตรฐานที่ออกสอบบ่อยที่สุด)</li>
+        <li>Service Level 97.5% &rarr; <b>Z = 1.96</b></li>
+        <li>Service Level 99% &rarr; <b>Z = 2.33</b></li>
+      </ul>
+    </div>
+
+    <div class="section-title">3. ความแตกต่างระหว่างระบบ ROP กับ ระบบ FOI</div>
+    <div class="content-block">
+      <ul>
+        <li><b>Continuous Review System (ROP Model):</b> มีการตรวจนับสต็อกแบบต่อเนื่องตลอดเวลา สั่งซื้อด้วยปริมาณคงที่ (Q) ทุกครั้งที่ระดับสินค้าแตะจุด ROP มีความเสี่ยงต่อของขาดมือเฉพาะช่วงเวลารอคอยสินค้า (LT) เท่านั้น</li>
+        <li><b>Fixed-Order-Interval System (FOI Model):</b> ตรวจนับสต็อกตามรอบเวลาคงที่ (Order Interval: OI) เช่น ทุกวันศุกร์ และสั่งซื้อปริมาณแปรผันตามที่ขาด <i>ข้อสำคัญ: ระบบนี้มีความเสี่ยงต่อของขาดมือครอบคลุมยาวนานกว่า คือช่วงเวลา (OI + LT) ส่งผลให้จำเป็นต้องถือครอง Safety Stock ในปริมาณที่สูงกว่าระบบ ROP ทั่วไป</i></li>
+      </ul>
+    </div>
+
     <div class="footer">
-      <span>Warehouse and Inventory Management</span>
-      <span>Slide 5 / 5</span>
+      <span>Warehouse & Inventory Management</span>
+      <span>Section 3-3</span>
     </div>
   </div>
 
 </div>
 
+<script>
+  function switchSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
+  }
+</script>
+
 </body>
 </html>
+
